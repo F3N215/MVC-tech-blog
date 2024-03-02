@@ -18,3 +18,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ exended: true }));
 app.use(express.static(path.join(__dirname, "public"))); //static files will be in the public folder, this joins the root path with it
+app.use(routes);
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`Server is now running at port ${PORT}`));
+});
