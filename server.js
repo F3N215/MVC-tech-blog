@@ -1,9 +1,10 @@
 // import modules
 const path = require("path");
-const express = require("express"); // handlebars import syntax
+const express = require("express");
+const session = require("express-session");
 const exphbs = require("express-handlebars");
-const routes = require("./controllers"); // import routes
-const sequelize = require("./config/connection.js"); // import sequelize instance
+const helpers = require("./utils/helpers");
+const routes = require("./controllers");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
