@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../mdoels");
-const sequelize = require("../congi/config");
+const sequelize = require("../congi/connection");
 
 // uses GET method to retrieve all posts
 router.get("/", async (req, res) => {

@@ -2,7 +2,7 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../models");
 const withAuth = require("../utils/auth"); // middleware
-const sequelize = require("../config/config"); // interacts with database
+const sequelize = require("../config/connection"); // interacts with database
 
 // route fetches all posts from logged-in user from the database, incl. comments and userinfo
 router.get("/", withAuth, (req, res) => {
