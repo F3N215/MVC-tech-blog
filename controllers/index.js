@@ -1,14 +1,11 @@
 // import express router pkg to define routes for app
 const router = require("express").Router();
-const User = require("../models");
-const homeRoutes = require("./home-routes");
 const apiRoutes = require("./api");
+const homeRoutes = require("./home-routes");
+const dashboardRoutes = require("./dashboard-routes");
 
-router.get("/", async (req, res) => {
-  res.render("signup");
-});
-
-router.get("/api", apiRoutes);
-router.get("/", homeRoutes);
+router.use("/", homeRoutes);
+router.use("/dashboard", dashboardRoutes);
+router.use("/api", apiRoutes);
 
 module.exports = router;
