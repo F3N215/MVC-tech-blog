@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
+const path = require("path"); // Add missing import for 'path' module
 const sequelize = require("../config/connection");
 
 // uses GET method to retrieve all posts
 router.get("/", async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
-      // posts are pulled from db
       attributes: ["id", "title", "content", "created_at"],
       include: [
         {
@@ -25,15 +25,9 @@ router.get("/", async (req, res) => {
       order: [["created_at", "DESC"]],
     });
 
-    // serializes data once retrieved from db
-    const post = dbPostData.map((post) => post.get({ plain: true }));
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
     console.log(posts);
-    res.render("homepage", {
-      post,
-      loggedIn: req.session.loggedIn,
-      username: req.session.username,
-      userId: req.session.userId,
-    });
+    res.sendFile(path.join(__dirname, "../views/homepage.html")); // Serve HTML file using res.sendFile()
   } catch (err) {
     res.status(500).json(err);
   }
@@ -63,11 +57,7 @@ router.get("/post/:id", async (req, res) => {
     if (dbPostData) {
       const post = dbPostData.get({ plain: true });
       console.log(post);
-      res.render("single-post", {
-        post,
-        loggedIn: req.session.loggedIn,
-        username: req.session.username,
-      });
+      res.sendFile(path.join(__dirname, "../views/single-post.html")); // Serve HTML file using res.sendFile()
     } else {
       res.status(404).json({ message: "This id has no post." });
       return;
