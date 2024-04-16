@@ -13,10 +13,13 @@ const signupForm = async (event) => {
     headers: { "Content-Type": "application/json" },
   });
   if (response.ok) {
+    alert("You smell");
     document.location.replace("/dashboard");
   } else {
     alert("Something wrong!");
   }
 };
 
-document.querySelector("#signup-form").addEventListener("submit", signupForm);
+document.addEventListener("DOMContentLoaded", (event) => {
+  document.querySelector("#signup-form").addEventListener("submit", signupForm);
+});
