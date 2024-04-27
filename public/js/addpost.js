@@ -1,4 +1,5 @@
 const newpostForm = async (event) => {
+  console.log("YOU FUCKING ADDED A POST");
   event.preventDefault();
 
   const title = document.querySelector('input[name="post-title"]').value;
@@ -18,5 +19,8 @@ const newpostForm = async (event) => {
     alert("Something wrong!");
   }
 };
-
-document.querySelector("#newpost-form").addEventListener("submit", newpostForm);
+document.addEventListener("DOMContentLoaded", (event) => {
+  document
+    .querySelector("#newpost-form")
+    .addEventListener("submit", newpostForm);
+});

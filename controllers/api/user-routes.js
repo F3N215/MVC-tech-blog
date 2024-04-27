@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
         .json({ message: `User id ${req.params.id} is not valid.` });
       return;
     }
-    // check pw
+    // checks for pw
     const pwValidated = await dbUserData.checkPassword(req.body.password);
     if (!pwValidated) {
       res.status(400).json({ message: "Incorrect password!" });
@@ -54,7 +54,7 @@ router.post("/login", async (req, res) => {
 router.post("/logout", withAuth, async (req, res) => {
   try {
     if (req.session.loggedIn) {
-      const dbUserData = await req.session.destroy(() => {
+      await req.session.destroy(() => {
         res.status(204).end();
       });
     } else {

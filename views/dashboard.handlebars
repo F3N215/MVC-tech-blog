@@ -14,7 +14,9 @@
         </div>
     {{/each}}
 </section>
+{{ else }}
+    <h2>You have not created any posts yet!</h2>
 {{/if}}
 <button type="submit" class="btn"><a href="/dashboard/new"><i class="bi bi-plus-square"></i>Add New Post</a></button>
 
-<script src="../public/js/edit.js"></script>
+<script src="./js/edit.js"></script>
