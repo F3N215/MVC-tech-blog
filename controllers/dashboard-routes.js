@@ -16,10 +16,10 @@ router.get("/", withAuth, (req, res) => {
       {
         model: Comment,
         attributes: ["id", "comment", "postId", "userId", "created_at"],
-        include: {
-          model: User,
-          attributes: ["username"],
-        },
+        // include: {
+        //   model: User,
+        //   attributes: ["username"],
+        // },
       },
       {
         model: User,
@@ -28,7 +28,10 @@ router.get("/", withAuth, (req, res) => {
     ],
   })
     .then((dbPostData) => {
+      console.log("This is the dbPostData");
+      console.log(dbPostData);
       const posts = dbPostData.map((post) => post.get({ plain: true }));
+      // console.log(posts);
       res.render("dashboard", {
         posts,
         loggedIn: true,
