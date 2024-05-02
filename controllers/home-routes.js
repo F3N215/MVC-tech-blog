@@ -63,7 +63,8 @@ router.get("/post/:id", async (req, res) => {
     if (dbPostData) {
       const post = dbPostData.get({ plain: true });
       console.log(post);
-      res.sendFile(path.join(__dirname, "../views/single-post.html")); // Serve HTML file using res.sendFile()
+      res.render("single-post", { post: post, loggedIn: req.session.loggedIn });
+      //res.sendFile(path.join(__dirname, "../views/single-post.html")); // Serve HTML file using res.sendFile()
     } else {
       res.status(404).json({ message: "This id has no post." });
       return;
